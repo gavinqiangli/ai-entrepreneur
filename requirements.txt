@@ -1,0 +1,5 @@
+openai
+matplotlib
+python-dotenv
+langchain
+langchain_openai
