@@ -3,3 +3,4 @@ matplotlib
 python-dotenv
 langchain
 langchain_openai
+python-pptx
