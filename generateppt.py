@@ -2,6 +2,8 @@ from pptx import Presentation
 import os
 import tempfile
 import streamlit as st
+#from st_files_connection import FilesConnection
+
 
 def generate_file():
     #Hello World! example
@@ -48,10 +50,22 @@ def generate_file():
 @st.cache_resource(ttl="1h")
 def save_file():
     temp_dir = tempfile.TemporaryDirectory()
-    temp_filepath = os.path.join(temp_dir.name, 'test.pptx')
+    #temp_filepath = os.path.join(temp_dir.name, 'test.pptx')
+    temp_filepath = "test.pptx"
     prs = generate_file()
     prs.save(temp_filepath)
     return temp_filepath
+
+    # Create connection object and retrieve file contents.
+    # Specify input format is a csv and to cache the result for 600 seconds.
+    # conn = st.connection('gcs', type=FilesConnection)
+    # df = conn.read("streamlit-bucket/myfile.csv", input_format="csv", ttl=600)
+
+    # client = storage.Client.from_service_account_json(os.environ.get('GCP_CREDENTIALS_PATH'))
+    # bucket = client.bucket(os.environ.get('GCP_BUCKET_NAME'))
+    # blob = bucket.blob("test.pptx")
+    # blob.upload_from_file(source_file)
+
 
 temp_filepath = save_file()
 with open(temp_filepath, "rb") as template_file:
